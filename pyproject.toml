@@ -1,7 +1,10 @@
 [project]
 name = "thatline"
 version = "0.1.0"
-description = "Add your description here"
+description = "Finally, a way to find that line from that series you wanted to quote, but forgot."
+authors = "Roman Vlasenko <klavionik@gmail.com>"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "cyclopts>=4.22.2",
+]
