@@ -1,6 +1,7 @@
 import dataclasses
 import enum
 from pathlib import Path
+from typing import Self
 
 
 class SourceKind(enum.StrEnum):
@@ -13,16 +14,16 @@ class Source:
     path: Path
     kind: SourceKind
 
+    @classmethod
+    def from_path(cls, path: Path) -> Self:
+        last_suffix = path.suffixes[-1]
+        extension = last_suffix.lstrip(".")
 
-def parse_source(path: Path) -> Source:
-    last_suffix = path.suffixes[-1]
-    extension = last_suffix.lstrip(".")
-
-    match extension:
-        case "wav" | "aac" | "mp3":
-            return Source(path, SourceKind.AUDIO)
-        case "mp4" | "mkv" | "avi" | "webm":
-            return Source(path, SourceKind.VIDEO)
-        case _:
-            msg = f"Unsupported file extension {extension}."
-            raise ValueError(msg)
+        match extension:
+            case "wav" | "aac" | "mp3":
+                return cls(path, SourceKind.AUDIO)
+            case "mp4" | "mkv" | "avi" | "webm":
+                return cls(path, SourceKind.VIDEO)
+            case _:
+                msg = f"Unsupported file extension {extension}."
+                raise ValueError(msg)
