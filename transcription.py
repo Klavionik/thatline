@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 from schemas import WhisperTranscript
-from sources import Source, SourceKind
+from source import Source, SourceKind
 from transcript import Transcript
 
 

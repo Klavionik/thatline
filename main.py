@@ -2,7 +2,7 @@ from collections.abc import Sequence
 import cyclopts
 from cyclopts.types import ResolvedExistingPath
 
-from sources import Source
+from source import Source
 from transcription import transcribe_source
 
 app = cyclopts.App()

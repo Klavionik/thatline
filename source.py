@@ -16,10 +16,14 @@ class Source:
 
     @classmethod
     def from_path(cls, path: Path) -> Self:
-        last_suffix = path.suffixes[-1]
+        try:
+            last_suffix = path.suffixes[-1]
+        except IndexError:
+            raise ValueError("Path doesn't contain any suffixes.") from None
+
         extension = last_suffix.lstrip(".")
 
-        match extension:
+        match extension.lower():
             case "wav" | "aac" | "mp3":
                 return cls(path, SourceKind.AUDIO)
             case "mp4" | "mkv" | "avi" | "webm":
