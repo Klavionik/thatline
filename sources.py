@@ -3,9 +3,6 @@ import enum
 from pathlib import Path
 
 
-type Ext = str
-
-
 class SourceKind(enum.StrEnum):
     VIDEO = enum.auto()
     AUDIO = enum.auto()
@@ -13,8 +10,6 @@ class SourceKind(enum.StrEnum):
 
 @dataclasses.dataclass(frozen=True)
 class Source:
-    name: str
-    ext: str
     path: Path
     kind: SourceKind
 
@@ -25,9 +20,9 @@ def parse_source(path: Path) -> Source:
 
     match extension:
         case "wav" | "aac" | "mp3":
-            return Source(path.name, extension, path, SourceKind.AUDIO)
+            return Source(path, SourceKind.AUDIO)
         case "mp4" | "mkv" | "avi" | "webm":
-            return Source(path.name, extension, path, SourceKind.VIDEO)
+            return Source(path, SourceKind.VIDEO)
         case _:
             msg = f"Unsupported file extension {extension}."
             raise ValueError(msg)
