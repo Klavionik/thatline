@@ -2,10 +2,9 @@ import os
 import tempfile
 from pathlib import Path
 
-
 from schemas import WhisperTranscript
 from source import Source, SourceKind
-from transcript import Transcript, Segment
+from transcript import Segment, Transcript
 
 
 def transcribe_source(source: Source) -> Transcript:

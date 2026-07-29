@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+
 import cyclopts
 from cyclopts.types import ResolvedExistingPath
 
