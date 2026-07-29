@@ -5,7 +5,7 @@ from pathlib import Path
 
 from schemas import WhisperTranscript
 from source import Source, SourceKind
-from transcript import Transcript
+from transcript import Transcript, Segment
 
 
 def transcribe_source(source: Source) -> Transcript:
@@ -24,7 +24,13 @@ def _transcribe_audio(audio: os.PathLike[str] | str) -> Transcript:
     whisper_result = whisper.transcribe(model, str(path))
     whisper_transcript = WhisperTranscript.model_validate(whisper_result)
     return Transcript(
-        path, whisper_transcript.text, whisper_transcript.segments, whisper_transcript.language
+        path,
+        whisper_transcript.text,
+        [
+            Segment(segment.id, segment.start, segment.end, segment.text)
+            for segment in whisper_transcript.segments
+        ],
+        whisper_transcript.language,
     )
 
 

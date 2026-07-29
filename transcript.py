@@ -5,9 +5,9 @@ from pathlib import Path
 @dataclasses.dataclass(frozen=True)
 class Segment:
     id: int
-    text: str
     start: float
     end: float
+    text: str
 
 
 @dataclasses.dataclass(frozen=True)
