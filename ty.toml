@@ -1,0 +1,3 @@
+[rules]
+missing-type-argument = "error"  # Generics must have a type argument.
+blanket-ignore-comment = "error"  # Allow ignoring only specific rules.
